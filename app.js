@@ -1,9 +1,9 @@
 const canvas = document.getElementById("cipherCanvas");
 const ctx = canvas.getContext("2d");
 
-const outerRadius = 140; // Increased outer radius for the boundary
-const innerRadius = 80;
-const gap = 1; // Gap between the circles
+const outerRadius = 400;
+const innerRadius = 100;
+const gap = 50;
 const numSegments = 26;
 
 canvas.width = window.innerWidth;
@@ -14,27 +14,24 @@ let rotationAngleInner = 0;
 let isDraggingOuter = false;
 let isDraggingInner = false;
 
-
 function drawCipherWheel() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
 
-// Draw outer boundary with styling
-    ctx.strokeStyle = "#00000"; // Red color
-    ctx.lineWidth = 2; // Thicker line
-    ctx.shadowColor = "#888888"; // Shadow color
-    ctx.shadowBlur = 3; // Shadow blur
+    // Draw outer boundary with styling
+    ctx.strokeStyle = "#3498db"; // Blue color
+    ctx.lineWidth = 2;
+    ctx.shadowColor = "#2980b9"; // Darker blue shadow color
+    ctx.shadowBlur = 10;
     ctx.beginPath();
     ctx.arc(centerX, centerY, outerRadius, 0, 2 * Math.PI);
     ctx.stroke();
 
-
     // Draw outer circle
-    ctx.fillStyle = "#00000";
-    //ctx.font = "bold 20px Arial";
-    ctx.font = "bold 40px 'Times New Roman'";
+    ctx.fillStyle = "f6578"; // Blue color
+    ctx.font = "bold 55px 'Arial'"; // Changed font to Arial
 
     for (let i = 0; i < numSegments; i++) {
         const angle = (i * 2 * Math.PI) / numSegments + rotationAngleOuter;
@@ -44,16 +41,16 @@ function drawCipherWheel() {
         ctx.save();
         ctx.translate(x, y);
         ctx.rotate(angle + Math.PI / 2);
-        ctx.fillText(String.fromCharCode(97 + i), 0, 0); //LowerCase
-       // ctx.fillText(String.fromCharCode(65 + i), 0, 0);
+        const sequenceOuter = "abcdefghijklmnopqrstuvwxyz";
+        ctx.fillText(sequenceOuter.charAt(i), 0, 0);
         ctx.restore();
     }
 
     // Draw inner circle with lines connecting to outer circle
-    ctx.fillStyle = "#00000";
-    ctx.strokeStyle = "#00000";
-    ctx.font = "bold 45px 'Times New Roman'";
-    
+    ctx.fillStyle = "#ecf0f1"; // Light gray color
+    ctx.strokeStyle = "#bdc3c7"; // Lighter gray color
+    ctx.font = "bold 70px 'Arial'"; // Changed font to Arial
+
     for (let i = 0; i < numSegments; i++) {
         const outerAngle = (i * 2 * Math.PI) / numSegments + rotationAngleOuter;
         const outerX = centerX + outerRadius * Math.cos(outerAngle);
@@ -67,28 +64,23 @@ function drawCipherWheel() {
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
         ctx.lineTo(innerX, innerY);
-        ctx.strokeStyle = "#ffff00"; // Yellow color for the line (radius)
-
+        ctx.strokeStyle = "#white"; // Red color for the line (radius)
         ctx.stroke();
 
         ctx.save();
         ctx.translate(innerX, innerY);
         ctx.rotate(innerAngle + Math.PI / 2);
-        ctx.fillText(String.fromCharCode(65 + i), 0, 0); // Uppper case
-        //ctx.fillText(String.fromCharCode(97 + i), 0, 0);
-        ctx.restore();
 
-        // Draw line connecting inner circle to outer circle
-        /* ctx.beginPath();
-        ctx.moveTo(innerX, innerY);
-        ctx.lineTo(outerX, outerY);
-        ctx.stroke(); */
+        const sequenceInner = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        ctx.fillText(sequenceInner.charAt(i), 0, 0);
+
+        ctx.restore();
     }
 
     // Draw circumference for inner circle
-    ctx.strokeStyle = "#e74c3c";
+    ctx.strokeStyle = "#pink"; // Green color
     ctx.beginPath();
-    ctx.arc(centerX, centerY, outerRadius + gap + innerRadius, 0, 2* Math.PI);
+    ctx.arc(centerX, centerY, outerRadius + gap + innerRadius, 0, 2 * Math.PI);
     ctx.stroke();
 }
 
