@@ -1,7 +1,7 @@
 const canvas = document.getElementById("cipherCanvas");
 const ctx = canvas.getContext("2d");
 
-const outerRadius = 400;
+const outerRadius = 300;
 const innerRadius = 100;
 const gap = 50;
 const numSegments = 26;
