@@ -1,2 +1,2 @@
 # QCipher
-Alberi Cipher || Visual Display
+Alberti Cipher || Visual Display
