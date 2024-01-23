@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 
 const outerRadius = 300;
 const innerRadius = 100;
-const gap = 50;
+const gap = 2;
 const numSegments = 26;
 
 canvas.width = window.innerWidth;
